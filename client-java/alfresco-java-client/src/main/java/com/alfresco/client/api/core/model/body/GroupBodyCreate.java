@@ -1,5 +1,7 @@
 package com.alfresco.client.api.core.model.body;
 
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -13,13 +15,13 @@ public class GroupBodyCreate
     @SerializedName("displayName")
     public final String displayName;
 
-    @SerializedName("parentGroupId")
-    public final String parentGroupId;
+    @SerializedName("parentIds")
+    public final List<String> parentIds;
 
-    public GroupBodyCreate(String id, String displayName, String parentGroupId)
+    public GroupBodyCreate(String id, String displayName, List<String> parentIds)
     {
         this.id = id;
         this.displayName = displayName;
-        this.parentGroupId = parentGroupId;
+        this.parentIds = parentIds;
     }
 }
