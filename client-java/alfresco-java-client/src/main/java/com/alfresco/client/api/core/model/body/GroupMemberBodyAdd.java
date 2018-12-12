@@ -7,11 +7,15 @@ import com.google.gson.annotations.SerializedName;
  */
 public class GroupMemberBodyAdd
 {
-    @SerializedName("groupMembmerId")
-    public final String groupMembmerId;
+    @SerializedName("id")
+    public final String id;
+    
+    @SerializedName("memberType")
+    public final String memberType;
 
-    public GroupMemberBodyAdd(String groupMembmerId)
+    public GroupMemberBodyAdd(String id, String memberType)
     {
-        this.groupMembmerId = groupMembmerId;
+        this.id = id;
+        this.memberType = memberType;
     }
 }
