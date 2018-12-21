@@ -18,6 +18,8 @@
 
 package com.alfresco.client;
 
+import java.util.List;
+
 import com.alfresco.client.api.authentication.AuthenticationAPI;
 import com.alfresco.client.api.authentication.representation.TicketRepresentation;
 import com.alfresco.client.api.authentication.representation.ValidTicketRepresentation;
@@ -27,6 +29,13 @@ import com.alfresco.client.api.common.representation.ResultPaging;
 import com.alfresco.client.api.core.*;
 import com.alfresco.client.api.core.model.deserializer.FavoriteEntryDeserializer;
 import com.alfresco.client.api.core.model.representation.*;
+import com.alfresco.client.api.dictionary.DictionaryAPI;
+import com.alfresco.client.api.dictionary.deserializer.DictionaryEntryDeserializer;
+import com.alfresco.client.api.dictionary.deserializer.DictionaryListDeserializer;
+import com.alfresco.client.api.dictionary.representation.AspectInfoRepresentation;
+import com.alfresco.client.api.dictionary.representation.ClassRepresentation;
+import com.alfresco.client.api.dictionary.representation.ParentInfoRepresentation;
+import com.alfresco.client.api.dictionary.representation.PropertyRepresentation;
 import com.alfresco.client.api.discovery.DiscoveryAPI;
 import com.alfresco.client.api.discovery.model.RepositoryInfoRepresentation;
 import com.alfresco.client.api.search.SearchAPI;
@@ -77,6 +86,8 @@ public class AlfrescoClient extends AbstractClient<AlfrescoClient> {
 	protected GroupsAPI groupsAPI;
 
 	protected VersionAPI versionAPI;
+	
+	protected DictionaryAPI dictionaryAPI;
 
 	// ///////////////////////////////////////////////////////////////////////////
 	// CONSTRUCTOR
@@ -199,8 +210,6 @@ public class AlfrescoClient extends AbstractClient<AlfrescoClient> {
 		return searchAPI;
 	}
 
-	// Not implemented
-
 	public GroupsAPI getGroupsAPI() {
 		if (groupsAPI == null) {
 			groupsAPI = getAPI(GroupsAPI.class);
@@ -213,6 +222,13 @@ public class AlfrescoClient extends AbstractClient<AlfrescoClient> {
 			versionAPI = getAPI(VersionAPI.class);
 		}
 		return versionAPI;
+	}
+	
+	public DictionaryAPI getDictionaryAPI() {
+		if (dictionaryAPI == null) {
+			dictionaryAPI = getAPI(DictionaryAPI.class);
+		}
+		return dictionaryAPI;
 	}
 
 	// ///////////////////////////////////////////////////////////////////////////
@@ -360,6 +376,21 @@ public class AlfrescoClient extends AbstractClient<AlfrescoClient> {
 							new EntryDeserializer<ResultNodeRepresentation>())
 					.registerTypeAdapter(new TypeToken<ResultSetRepresentation<ResultNodeRepresentation>>() {
 					}.getType(), new ResultSetPagingDeserializer<>(ResultNodeRepresentation.class))
+					
+					// Dictionary
+					.registerTypeAdapter(ClassRepresentation.class, new DictionaryEntryDeserializer<ClassRepresentation>())
+					.registerTypeAdapter(PropertyRepresentation.class, new DictionaryEntryDeserializer<PropertyRepresentation>())
+					.registerTypeAdapter(ParentInfoRepresentation.class, new DictionaryEntryDeserializer<ParentInfoRepresentation>())
+					.registerTypeAdapter(AspectInfoRepresentation.class, new DictionaryEntryDeserializer<AspectInfoRepresentation>())
+
+					.registerTypeAdapter(new TypeToken<List<ClassRepresentation>>() {
+					}.getType(), new DictionaryListDeserializer<>(ClassRepresentation.class))
+					.registerTypeAdapter(new TypeToken<List<PropertyRepresentation>>() {
+					}.getType(), new DictionaryListDeserializer<>(PropertyRepresentation.class))
+					.registerTypeAdapter(new TypeToken<List<ParentInfoRepresentation>>() {
+					}.getType(), new DictionaryListDeserializer<>(ParentInfoRepresentation.class))
+					.registerTypeAdapter(new TypeToken<List<AspectInfoRepresentation>>() {
+					}.getType(), new DictionaryListDeserializer<>(AspectInfoRepresentation.class))
 
 			// Workflow
 

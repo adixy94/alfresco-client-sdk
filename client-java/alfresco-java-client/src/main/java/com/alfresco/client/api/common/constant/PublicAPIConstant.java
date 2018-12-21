@@ -299,4 +299,7 @@ public interface PublicAPIConstant extends OnPremiseConstant
     String INCLUDEVARIABLES_VALUE = "includeVariables";
 
     String PROCESSVARIABLES_VALUE = "processVariables";
+    
+    // DICTIONARY
+    String NAMESPACE_VALUE = "nsp";
 }
