@@ -26,12 +26,13 @@ package com.alfresco.client.api.core.model.representation;
 
 import java.util.Objects;
 
+import com.alfresco.client.api.common.representation.AbstractRepresentation;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Group
  */
-public class GroupRepresentation
+public class GroupRepresentation extends AbstractRepresentation
 {
     @SerializedName("id")
     private String id = null;
