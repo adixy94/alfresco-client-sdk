@@ -28,7 +28,7 @@ public interface DictionaryAPI {
 	 * @param className
 	 *            Optionally filter the list by a class name. Full class name
 	 *            example: "{classNamespace}:{className}". Works only if the
-	 *            className is defined (optional)
+	 *            classNamespace is defined (optional)
 	 * @return List<ClassRepresentation>
 	 */
 	@GET(DictionaryConstant.DISCOVERY_PUBLIC_API + "/defclasses")
@@ -44,7 +44,7 @@ public interface DictionaryAPI {
 	 * @param className
 	 *            Optionally filter the list by a class name. Full class name
 	 *            example: "{classNamespace}:{className}". Works only if the
-	 *            className is defined (optional)
+	 *            classNamespace is defined (optional)
 	 * @return List<ClassRepresentation>
 	 */
 	@GET(DictionaryConstant.DISCOVERY_PUBLIC_API + "/defclasses")
