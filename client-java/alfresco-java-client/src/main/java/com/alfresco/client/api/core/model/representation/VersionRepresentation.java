@@ -2,12 +2,13 @@ package com.alfresco.client.api.core.model.representation;
 
 import java.util.*;
 
+import com.alfresco.client.api.common.representation.AbstractRepresentation;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by jpascal on 30/09/2016.
  */
-public class VersionRepresentation
+public class VersionRepresentation extends AbstractRepresentation
 {
 
     @SerializedName("id")
