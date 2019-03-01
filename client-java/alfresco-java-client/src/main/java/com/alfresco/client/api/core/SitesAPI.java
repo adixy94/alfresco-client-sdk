@@ -106,6 +106,77 @@ public interface SitesAPI
      *            method have a descending default search order. To sort the
      *            entities in a specific order, you can use the **ASC** and
      *            **DESC** keywords for any field. (optional)
+     * @return SitePaging
+     */
+    @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/sites")
+    Call<ResultPaging<SiteRepresentation>> listSitesCall(@Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
+            @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
+            @Query(PublicAPIConstant.ORDER_BY_VALUE) OrderByParam orderBy);
+
+    /**
+     * List sites Gets a list of sites in this repository. You can use the
+     * **where** parameter to filter the returned sites by **visibility**. For
+     * example, any one of: &#x60;&#x60;&#x60; (visibility&#x3D;PRIVATE)
+     * (visibility&#x3D;PUBLIC) (visibility&#x3D;MODERATED) &#x60;&#x60;&#x60;
+     * The default sort order for the returned list is for sites to be sorted by
+     * ascending title. You can override the default by using the **orderBy**
+     * parameter. You can specify one or more of the following fields in the
+     * **orderBy** parameter: * id * title * description You can use the
+     * **relations** parameter to include one or more related entities in a
+     * single response and so reduce network traffic. The entity types in
+     * Alfresco are organized in a tree structure. The **sites** entity has two
+     * children, **containers** and **members**. The following relations
+     * parameter returns all the container and member objects related to each
+     * site: &#x60;&#x60;&#x60; containers,members &#x60;&#x60;&#x60;
+     * 
+     * @param skipCount The number of entities that exist in the collection
+     *            before those included in this list. (optional)
+     * @param maxItems The maximum number of items to return in the list.
+     *            (optional)
+     * @param orderBy A string to control the order of the entities returned in
+     *            a list. You can use the **orderBy** parameter to sort the list
+     *            by one or more fields. Each field has a default sort order,
+     *            which is normally acending order. Read the API method
+     *            implementation notes above to check if any fields used in this
+     *            method have a descending default search order. To sort the
+     *            entities in a specific order, you can use the **ASC** and
+     *            **DESC** keywords for any field. (optional)
+     * @return SitePaging
+     */
+    @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/sites")
+    Observable<ResultPaging<SiteRepresentation>> listSitesObservable(
+            @Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
+            @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
+            @Query(PublicAPIConstant.ORDER_BY_VALUE) OrderByParam orderBy);
+    
+    /**
+     * List sites Gets a list of sites in this repository. You can use the
+     * **where** parameter to filter the returned sites by **visibility**. For
+     * example, any one of: &#x60;&#x60;&#x60; (visibility&#x3D;PRIVATE)
+     * (visibility&#x3D;PUBLIC) (visibility&#x3D;MODERATED) &#x60;&#x60;&#x60;
+     * The default sort order for the returned list is for sites to be sorted by
+     * ascending title. You can override the default by using the **orderBy**
+     * parameter. You can specify one or more of the following fields in the
+     * **orderBy** parameter: * id * title * description You can use the
+     * **relations** parameter to include one or more related entities in a
+     * single response and so reduce network traffic. The entity types in
+     * Alfresco are organized in a tree structure. The **sites** entity has two
+     * children, **containers** and **members**. The following relations
+     * parameter returns all the container and member objects related to each
+     * site: &#x60;&#x60;&#x60; containers,members &#x60;&#x60;&#x60;
+     * 
+     * @param skipCount The number of entities that exist in the collection
+     *            before those included in this list. (optional)
+     * @param maxItems The maximum number of items to return in the list.
+     *            (optional)
+     * @param orderBy A string to control the order of the entities returned in
+     *            a list. You can use the **orderBy** parameter to sort the list
+     *            by one or more fields. Each field has a default sort order,
+     *            which is normally acending order. Read the API method
+     *            implementation notes above to check if any fields used in this
+     *            method have a descending default search order. To sort the
+     *            entities in a specific order, you can use the **ASC** and
+     *            **DESC** keywords for any field. (optional)
      * @param relations Use the relations parameter to include one or more
      *            related entities in a single response. (optional)
      * @param fields A list of field names. You can use this parameter to
@@ -124,7 +195,7 @@ public interface SitesAPI
     Call<ResultPaging<SiteRepresentation>> listSitesCall(@Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
             @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
             @Query(PublicAPIConstant.ORDER_BY_VALUE) OrderByParam orderBy,
-            @Query(PublicAPIConstant.RELATIONS_VALUE) int relations,
+            @Query(PublicAPIConstant.RELATIONS_VALUE) Integer relations,
             @Query(PublicAPIConstant.FIELDS_VALUE) FieldsParam fields,
             @Query(PublicAPIConstant.WHERE_VALUE) String where);
 
@@ -175,7 +246,7 @@ public interface SitesAPI
             @Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
             @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
             @Query(PublicAPIConstant.ORDER_BY_VALUE) OrderByParam orderBy,
-            @Query(PublicAPIConstant.RELATIONS_VALUE) int relations,
+            @Query(PublicAPIConstant.RELATIONS_VALUE) Integer relations,
             @Query(PublicAPIConstant.FIELDS_VALUE) FieldsParam fields,
             @Query(PublicAPIConstant.WHERE_VALUE) String where);
 
