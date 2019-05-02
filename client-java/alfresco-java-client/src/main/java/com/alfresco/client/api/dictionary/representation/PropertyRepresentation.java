@@ -40,7 +40,7 @@ public class PropertyRepresentation extends AbstractRepresentation
     protected Boolean indexedAtomically = null;
 
     @SerializedName("constraints")
-    protected List<Object> constraints = new ArrayList<Object>();
+    protected List<ConstraintRepresentation> constraints = new ArrayList<ConstraintRepresentation>();
 
     // ///////////////////////////////////////////////////////////////////////////
     // GETTERS & SETTERS
@@ -126,11 +126,11 @@ public class PropertyRepresentation extends AbstractRepresentation
 		this.indexedAtomically = indexedAtomically;
 	}
 
-	public List<Object> getConstraints() {
+	public List<ConstraintRepresentation> getConstraints() {
 		return constraints;
 	}
 
-	public void setConstraints(List<Object> constraints) {
+	public void setConstraints(List<ConstraintRepresentation> constraints) {
 		this.constraints = constraints;
 	}
 
