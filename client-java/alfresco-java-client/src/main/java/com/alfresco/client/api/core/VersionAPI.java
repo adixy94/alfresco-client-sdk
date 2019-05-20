@@ -131,41 +131,38 @@ public interface VersionAPI
     // GET INFO
     // ///////////////////////////////////////////////////////////////////////////
     /**
-     * List version history **Note:** this endpoint is available in Alfresco 5.2
-     * and newer versions. Gets the version history as an ordered list of
-     * versions for the specified **nodeId**. The list is ordered in descending
-     * modified order. So the most recent version is first and the original
-     * version is last in the list.
+     * Get version info **Note:** this endpoint is available in Alfresco 5.2
+     * and newer versions. Gets the version info for the specified **nodeId**
+     * and **versionId**.
      * 
      * @param nodeId The identifier of a node. (required)
+     * @param versionId The identifier of a version. (required)
      * @return VersionPaging
      */
     @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/nodes/{nodeId}/versions/{versionId}")
-    Call<ResultPaging<VersionRepresentation>> getVersionCall(@Path("nodeId") String nodeId,
+    Call<VersionRepresentation> getVersionCall(@Path("nodeId") String nodeId,
             @Path("versionId") String versionId);
 
     /**
-     * List version history **Note:** this endpoint is available in Alfresco 5.2
-     * and newer versions. Gets the version history as an ordered list of
-     * versions for the specified **nodeId**. The list is ordered in descending
-     * modified order. So the most recent version is first and the original
-     * version is last in the list.
-     *
+     * Get version info **Note:** this endpoint is available in Alfresco 5.2
+     * and newer versions. Gets the version info for the specified **nodeId**
+     * and **versionId**.
+     * 
      * @param nodeId The identifier of a node. (required)
+     * @param versionId The identifier of a version. (required)
      * @return VersionPaging
      */
     @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/nodes/{nodeId}/versions/{versionId}")
-    Observable<ResultPaging<VersionRepresentation>> getVersionObservable(@Path("nodeId") String nodeId,
+    Observable<VersionRepresentation> getVersionObservable(@Path("nodeId") String nodeId,
             @Path("versionId") String versionId);
 
     /**
-     * List version history **Note:** this endpoint is available in Alfresco 5.2
-     * and newer versions. Gets the version history as an ordered list of
-     * versions for the specified **nodeId**. The list is ordered in descending
-     * modified order. So the most recent version is first and the original
-     * version is last in the list.
+     * Get version info **Note:** this endpoint is available in Alfresco 5.2
+     * and newer versions. Gets the version info for the specified **nodeId**
+     * and **versionId**.
      * 
      * @param nodeId The identifier of a node. (required)
+     * @param versionId The identifier of a version. (required)
      * @param include Returns additional information about the version node. The
      *            following optional fields can be requested: * properties *
      *            aspectNames (optional)
@@ -184,20 +181,19 @@ public interface VersionAPI
      * @return VersionPaging
      */
     @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/nodes/{nodeId}/versions/{versionId}")
-    Call<ResultPaging<VersionRepresentation>> getVersionCall(@Path("nodeId") String nodeId,
+    Call<VersionRepresentation> getVersionCall(@Path("nodeId") String nodeId,
             @Path("versionId") String versionId, @Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
             @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
             @Query(PublicAPIConstant.INCLUDE_VALUE) IncludeParam include,
             @Query(PublicAPIConstant.FIELDS_VALUE) FieldsParam fields);
 
     /**
-     * List version history **Note:** this endpoint is available in Alfresco 5.2
-     * and newer versions. Gets the version history as an ordered list of
-     * versions for the specified **nodeId**. The list is ordered in descending
-     * modified order. So the most recent version is first and the original
-     * version is last in the list.
-     *
+     * Get version info **Note:** this endpoint is available in Alfresco 5.2
+     * and newer versions. Gets the version info for the specified **nodeId**
+     * and **versionId**.
+     * 
      * @param nodeId The identifier of a node. (required)
+     * @param versionId The identifier of a version. (required)
      * @param include Returns additional information about the version node. The
      *            following optional fields can be requested: * properties *
      *            aspectNames (optional)
@@ -216,7 +212,7 @@ public interface VersionAPI
      * @return VersionPaging
      */
     @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/nodes/{nodeId}/versions/{versionId}")
-    Observable<ResultPaging<VersionRepresentation>> getVersionObservable(@Path("nodeId") String nodeId,
+    Observable<VersionRepresentation> getVersionObservable(@Path("nodeId") String nodeId,
             @Path("versionId") String versionId, @Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
             @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
             @Query(PublicAPIConstant.INCLUDE_VALUE) IncludeParam include,
