@@ -24,6 +24,7 @@ import com.alfresco.client.api.core.model.body.GroupBodyCreate;
 import com.alfresco.client.api.core.model.body.GroupBodyUpdate;
 import com.alfresco.client.api.core.model.body.GroupMemberBodyAdd;
 import com.alfresco.client.api.core.model.parameters.FieldsParam;
+import com.alfresco.client.api.core.model.parameters.IncludeParam;
 import com.alfresco.client.api.core.model.representation.GroupMemberRepresentation;
 import com.alfresco.client.api.core.model.representation.GroupRepresentation;
 
@@ -73,7 +74,10 @@ public interface GroupsAPI
      * newer versions. Gets a list of groups. You can use the **where**
      * parameter to filter the returned groups by **isRoot**. For example, the
      * following **where** clause will return just the root groups:
-     * &#x60;&#x60;&#x60; (isRoot&#x3D;true) &#x60;&#x60;&#x60; The default sort
+     * &#x60;&#x60;&#x60; (isRoot&#x3D;true) &#x60;&#x60;&#x60; The where parameter
+     * can also be used to filter by zone. This may be combined with isRoot to
+     * narrow a result set even further. For example, the following where clause
+     * will only return groups belonging to the MY.ZONE zone. The default sort
      * order for the returned list is for groups to be sorted by ascending
      * displayName. You can override the default by using the **orderBy**
      * parameter. You can specify one or more of the following fields in the
@@ -83,6 +87,18 @@ public interface GroupsAPI
      *            before those included in this list. (optional)
      * @param maxItems The maximum number of items to return in the list.
      *            (optional)
+     * @param where Optionally filter the list. Here are some examples: *
+     *            where&#x3D;(isRoot&#x3D;true) *
+     *            where&#x3D;(zones in (&#39;MY.ZONE&#39;)) *
+     *            where&#x3D;(isRoot=false AND zones in (&#39;MY.ZONE&#39;)) *
+     *            **Note** restrictions include: AND is the only supported operator
+     *            when combining isRoot and zones filters; Only one zone is
+     *            supported by the filter; The quoted zone name must be placed in
+     *            parenthesis - a 400 error will result if these are omitted.
+     *            (optional)
+     * @param include Returns additional information about the node. The
+     *            following optional fields can be requested: * parentIds *
+     *            zones (optional)
      * @param fields A list of field names. You can use this parameter to
      *            restrict the fields returned within a response if, for
      *            example, you want to save on overall bandwidth. The list
@@ -94,8 +110,11 @@ public interface GroupsAPI
      * @return GroupPaging
      */
     @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/groups")
-    Call<ResultPaging<GroupRepresentation>> listGroupsCall(@Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
+    Call<ResultPaging<GroupRepresentation>> listGroupsCall(
+    		@Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
             @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
+            @Query(PublicAPIConstant.WHERE_VALUE) String where,
+            @Query(PublicAPIConstant.INCLUDE_VALUE) IncludeParam include,
             @Query(PublicAPIConstant.FIELDS_VALUE) FieldsParam fields);
 
     /**
@@ -113,6 +132,18 @@ public interface GroupsAPI
      *            before those included in this list. (optional)
      * @param maxItems The maximum number of items to return in the list.
      *            (optional)
+     * @param where Optionally filter the list. Here are some examples: *
+     *            where&#x3D;(isRoot&#x3D;true) *
+     *            where&#x3D;(zones in (&#39;MY.ZONE&#39;)) *
+     *            where&#x3D;(isRoot=false AND zones in (&#39;MY.ZONE&#39;)) *
+     *            **Note** restrictions include: AND is the only supported operator
+     *            when combining isRoot and zones filters; Only one zone is
+     *            supported by the filter; The quoted zone name must be placed in
+     *            parenthesis - a 400 error will result if these are omitted.
+     *            (optional)
+     * @param include Returns additional information about the node. The
+     *            following optional fields can be requested: * parentIds *
+     *            zones (optional)
      * @param fields A list of field names. You can use this parameter to
      *            restrict the fields returned within a response if, for
      *            example, you want to save on overall bandwidth. The list
@@ -127,6 +158,8 @@ public interface GroupsAPI
     Observable<ResultPaging<GroupRepresentation>> listGroupsObservable(
             @Query(PublicAPIConstant.SKIP_COUNT_VALUE) Integer skipCount,
             @Query(PublicAPIConstant.MAX_ITEMS_VALUE) Integer maxItems,
+            @Query(PublicAPIConstant.WHERE_VALUE) String where,
+            @Query(PublicAPIConstant.INCLUDE_VALUE) IncludeParam include,
             @Query(PublicAPIConstant.FIELDS_VALUE) FieldsParam fields);
 
     // ///////////////////////////////////////////////////////////////////////////
@@ -157,6 +190,9 @@ public interface GroupsAPI
      * and newer versions. Get details for group **groupId**.
      * 
      * @param groupId The identifier of a group. (required)
+     * @param include Returns additional information about the node. The
+     *            following optional fields can be requested: * parentIds *
+     *            zones (optional)
      * @param fields A list of field names. You can use this parameter to
      *            restrict the fields returned within a response if, for
      *            example, you want to save on overall bandwidth. The list
@@ -169,6 +205,7 @@ public interface GroupsAPI
      */
     @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/groups/{groupId}")
     Call<GroupRepresentation> getGroupCall(@Path("groupId") String groupId,
+    		@Query(PublicAPIConstant.INCLUDE_VALUE) IncludeParam include,
             @Query(PublicAPIConstant.FIELDS_VALUE) FieldsParam fields);
 
     /**
@@ -176,6 +213,9 @@ public interface GroupsAPI
      * and newer versions. Get details for group **groupId**.
      *
      * @param groupId The identifier of a group. (required)
+     * @param include Returns additional information about the node. The
+     *            following optional fields can be requested: * parentIds *
+     *            zones (optional)
      * @param fields A list of field names. You can use this parameter to
      *            restrict the fields returned within a response if, for
      *            example, you want to save on overall bandwidth. The list
@@ -188,6 +228,7 @@ public interface GroupsAPI
      */
     @GET(CoreConstant.CORE_PUBLIC_API_V1 + "/groups/{groupId}")
     Observable<GroupRepresentation> getGroupObservable(@Path("groupId") String groupId,
+    		@Query(PublicAPIConstant.INCLUDE_VALUE) IncludeParam include,
             @Query(PublicAPIConstant.FIELDS_VALUE) FieldsParam fields);
 
     // ///////////////////////////////////////////////////////////////////////////

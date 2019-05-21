@@ -24,6 +24,8 @@
 
 package com.alfresco.client.api.core.model.representation;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.alfresco.client.api.common.representation.AbstractRepresentation;
@@ -42,6 +44,12 @@ public class GroupRepresentation extends AbstractRepresentation
 
     @SerializedName("isRoot")
     private Boolean isRoot = true;
+    
+    @SerializedName("zones")
+    private List<String> zones = new ArrayList<>();
+    
+    @SerializedName("parentIds")
+    private List<String> parentIds = new ArrayList<>();
 
     /**
      * Get id
@@ -87,6 +95,46 @@ public class GroupRepresentation extends AbstractRepresentation
     {
         this.isRoot = isRoot;
     }
+    
+    /**
+     * Get parentIds
+     * 
+     * @return parentIds
+     **/
+    public List<String> getParentIds()
+    {
+        return parentIds;
+    }
+
+    public void setParentIds(List<String> parentIds)
+    {
+        this.parentIds = parentIds;
+    }
+
+    public boolean hasParentIds(String parentName)
+    {
+        return parentIds != null && parentIds.contains(parentName);
+    }
+    
+    /**
+     * Get zones
+     * 
+     * @return zones
+     **/
+    public List<String> getZones()
+    {
+        return zones;
+    }
+
+    public void setZones(List<String> zones)
+    {
+        this.zones = zones;
+    }
+
+    public boolean hasZones(String zoneName)
+    {
+        return zones != null && zones.contains(zoneName);
+    }
 
     @Override
     public boolean equals(Object o)
@@ -95,13 +143,15 @@ public class GroupRepresentation extends AbstractRepresentation
         if (o == null || getClass() != o.getClass()) { return false; }
         GroupRepresentation group = (GroupRepresentation) o;
         return Objects.equals(this.id, group.id) && Objects.equals(this.displayName, group.displayName)
-                && Objects.equals(this.isRoot, group.isRoot);
+                && Objects.equals(this.isRoot, group.isRoot)
+                && Objects.equals(this.parentIds, group.parentIds)
+                && Objects.equals(this.zones, group.zones);
     }
 
     @Override
     public int hashCode()
     {
-        return Objects.hash(id, displayName, isRoot);
+        return Objects.hash(id, displayName, isRoot, parentIds, zones);
     }
 
     @Override
@@ -113,6 +163,8 @@ public class GroupRepresentation extends AbstractRepresentation
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
         sb.append("    isRoot: ").append(toIndentedString(isRoot)).append("\n");
+        sb.append("    parentIds: ").append(toIndentedString(parentIds)).append("\n");
+        sb.append("    zones: ").append(toIndentedString(zones)).append("\n");
         sb.append("}");
         return sb.toString();
     }
