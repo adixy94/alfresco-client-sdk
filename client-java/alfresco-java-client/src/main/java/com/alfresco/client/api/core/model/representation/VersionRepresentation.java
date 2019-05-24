@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.alfresco.client.api.common.representation.AbstractRepresentation;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.internal.LinkedTreeMap;
 
 /**
  * Created by jpascal on 30/09/2016.
@@ -42,7 +43,7 @@ public class VersionRepresentation extends AbstractRepresentation
     private List<String> aspectNames = new ArrayList<>();
 
     @SerializedName("properties")
-    private Map<String, String> properties = new HashMap<String, String>();
+    protected LinkedTreeMap<String, Object> properties;
 
     /**
      * Get id
@@ -201,12 +202,12 @@ public class VersionRepresentation extends AbstractRepresentation
      * 
      * @return properties
      **/
-    public Map<String, String> getProperties()
+    public LinkedTreeMap<String, Object> getProperties()
     {
         return properties;
     }
 
-    public void setProperties(Map<String, String> properties)
+    public void setProperties(LinkedTreeMap<String, Object> properties)
     {
         this.properties = properties;
     }
